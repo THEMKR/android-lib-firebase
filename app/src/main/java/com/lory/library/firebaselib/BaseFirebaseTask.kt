@@ -142,50 +142,6 @@ abstract class BaseFirebaseTask<MKR> {
     }
 
     /**
-     * Method to get the Max Retry Count
-     */
-    protected fun getMaxRetryCount(): Int {
-        return 3
-    }
-
-    /**
-     * Method to get the Data from Firebase
-     * @param databaseError Array<DataSnapshot/DatabaseError>
-     */
-    protected fun parseFirebaseDataError(databaseError: DatabaseError): FirebaseResponse<MKR> {
-        return FirebaseResponse<MKR>(databaseError.code, databaseError.message)
-    }
-
-    /**
-     * Method to get the Response when Network is not there
-     */
-    protected fun getNoNetworkError(): FirebaseResponse<MKR> {
-        return FirebaseResponse(ERROR.NO_NETWORK_CODE, ERROR.NO_NETWORK_MESSAGE)
-    }
-
-    /**
-     * Method to get the Response when Miscellaneous error occured
-     */
-    protected fun getMiscellaneousError(): FirebaseResponse<MKR> {
-        return FirebaseResponse(ERROR.MISCELLANEOUS_ERROR_CODE, ERROR.MISCELLANEOUS_ERROR_MESSAGE)
-    }
-
-    /**
-     * Method to get the Response when No response received from Firebase
-     */
-    protected fun getNoResponseReceivedError(): FirebaseResponse<MKR> {
-        return FirebaseResponse(ERROR.NOTHING_RECEIVED_CODE, ERROR.NOTHING_RECEIVED_MESSAGE)
-    }
-
-    /**
-     * Method to get the Firebase Database URL.
-     * @return URL if fetch data from another project, else return NULL
-     */
-    protected fun getFirebaseDatabaseURL(): String? {
-        return null
-    }
-
-    /**
      * Method to check weather there is at least singel success item in List
      * @param dataArray
      */
@@ -199,16 +155,61 @@ abstract class BaseFirebaseTask<MKR> {
     }
 
     /**
+     * Method to get the Max Retry Count
+     */
+    protected open fun getMaxRetryCount(): Int {
+        return 3
+    }
+
+    /**
+     * Method to get the Data from Firebase
+     * @param databaseError Array<DataSnapshot/DatabaseError>
+     */
+    protected open fun parseFirebaseDataError(databaseError: DatabaseError): FirebaseResponse<MKR> {
+        return FirebaseResponse<MKR>(databaseError.code, databaseError.message)
+    }
+
+    /**
+     * Method to get the Response when Network is not there
+     */
+    protected open fun getNoNetworkError(): FirebaseResponse<MKR> {
+        return FirebaseResponse(ERROR.NO_NETWORK_CODE, ERROR.NO_NETWORK_MESSAGE)
+    }
+
+    /**
+     * Method to get the Response when Miscellaneous error occured
+     */
+    protected open fun getMiscellaneousError(): FirebaseResponse<MKR> {
+        return FirebaseResponse(ERROR.MISCELLANEOUS_ERROR_CODE, ERROR.MISCELLANEOUS_ERROR_MESSAGE)
+    }
+
+    /**
+     * Method to get the Response when No response received from Firebase
+     */
+    protected open fun getNoResponseReceivedError(): FirebaseResponse<MKR> {
+        return FirebaseResponse(ERROR.NOTHING_RECEIVED_CODE, ERROR.NOTHING_RECEIVED_MESSAGE)
+    }
+
+    /**
+     * Method to get the Firebase Database URL.
+     * @return URL if fetch data from another project, else return NULL
+     */
+    protected open fun getFirebaseDatabaseURL(): String? {
+        return null
+    }
+
+
+    /**
      * Method to Execute before the mkrWorker start background execution
      */
-    protected fun preExecute() {
+    protected open fun preExecute() {
         // Do whatever you want to
     }
 
     /**
      * Method to Execute after the mkrWorker response
      */
-    protected fun postExecute(mkr: MKR?): MKR? {
+    protected open fun postExecute(mkr: MKR?): MKR? {
         return mkr
     }
 
