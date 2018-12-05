@@ -1,12 +1,13 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
-        applicationId "com.lory.library.advertisement"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -25,7 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-core:16.0.4'
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
