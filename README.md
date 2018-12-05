@@ -20,7 +20,7 @@
 		classpath 'com.google.gms:google-services:4.1.0'
 
 #	APP Level Gradle
-		implementation 'com.lory.library:firebase:1.0.0'
+		implementation 'com.lory.library:firebase:1.0.1'
         implementation 'com.google.firebase:firebase-database:16.0.4'
         implementation 'com.google.firebase:firebase-core:16.0.4'
         
