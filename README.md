@@ -9,11 +9,7 @@
 #	Project Level Gradle
 		repositories {
 			maven {
-				url "https://api.bitbucket.org/1.0/repositories/THEMKR/android-lib-firebase/raw/releases"
-				credentials {
-					username 'THEMKR'
-					password '<PASSWORD>'
-				}
+				url "https://api.bitbucket.org/1.0/repositories/THEMKR/android-libs/raw/releases"
 			}
 		}
 		
