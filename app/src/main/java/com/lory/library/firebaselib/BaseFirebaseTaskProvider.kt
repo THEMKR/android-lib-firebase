@@ -27,7 +27,7 @@ open class BaseFirebaseTaskProvider {
      * @param firebaseCallBack
      * @param o
      */
-    fun notifyTaskSuccess(firebaseCallBack: FirebaseCallBack<Any>, o: Any) {
+    fun notifyTaskSuccess(firebaseCallBack: FirebaseCallBack<Any>, o: Any?) {
         if (mIsAttach) {
             firebaseCallBack.onFirebaseSuccess(o)
         }
