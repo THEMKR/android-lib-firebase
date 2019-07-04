@@ -8,19 +8,14 @@
 
 #	Project Level Gradle
 		repositories {
-			maven {
-				url "https://api.bitbucket.org/1.0/repositories/THEMKR/android-libs/raw/releases"
-			}
+			maven { url 'https://jitpack.io' }
 		}
-		
-		classpath 'com.google.gms:google-services:4.1.0'
 
 #	APP Level Gradle
-        <!-- DEPENDENCY INCLUDE IN LIB -->
-        implementation 'com.google.firebase:firebase-database:16.0.4'
-        implementation 'com.google.firebase:firebase-core:16.0.4'
-        apply plugin: 'com.google.gms.google-services'
-         
-        <!-- SUPPORT MUST BE INCLUDE -->
-		implementation 'com.lory.library:firebase:1.0.1'
-		
+
+        implementation 'com.github.THEMKR:android-lib-firebase:1.0.0'
+
+	<!-- DEPENDENCY INCLUDE IN LIB -->
+	implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
