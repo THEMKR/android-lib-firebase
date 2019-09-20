@@ -63,9 +63,6 @@ abstract class BaseFirebaseTask<MKR> {
      * @return DataSnapshot/DatabaseError
      */
     private fun doInBackground(): FirebaseResponse<MKR> {
-        if (!ConnectivityInfoUtils.isConnected(context, true)) {
-            return getNoNetworkError()
-        }
         var firebaseData: FirebaseData
         var retryCount = 0
         while (true) {
@@ -76,23 +73,19 @@ abstract class BaseFirebaseTask<MKR> {
             }
         }
         // CHECK CONDITIONS
-        if (firebaseData != null) {
-            if (!isBulkRequest()) {
-                if (firebaseData.dataArray.size == 0) {
-                    return getNoResponseReceivedError() // NOTHING RECEIVED FROM SERVER
-                }
-                return if (firebaseData.dataArray.get(0) is DataSnapshot) {
-                    FirebaseResponse(parseFirebaseDataSnapShot(firebaseData.dataArray.get(0) as DataSnapshot)) // SUCCESS DATA RECEIVED FROM SERVER
-                } else if (firebaseData.dataArray.get(0) is DatabaseError) {
-                    parseFirebaseDataError(firebaseData.dataArray.get(0) as DatabaseError) // ERROR RECEIVED FROM SERVER
-                } else {
-                    getMiscellaneousError() // MIS DATA RECEIVED FROM SERVER
-                }
+        if (!isBulkRequest()) {
+            if (firebaseData.dataArray.size == 0) {
+                return getNoResponseReceivedError() // NOTHING RECEIVED FROM SERVER
+            }
+            return if (firebaseData.dataArray.get(0) is DataSnapshot) {
+                FirebaseResponse(parseFirebaseDataSnapShot(firebaseData.dataArray.get(0) as DataSnapshot)) // SUCCESS DATA RECEIVED FROM SERVER
+            } else if (firebaseData.dataArray.get(0) is DatabaseError) {
+                parseFirebaseDataError(firebaseData.dataArray.get(0) as DatabaseError) // ERROR RECEIVED FROM SERVER
             } else {
-                return FirebaseResponse(parseFirebaseDataSnapShot(firebaseData.dataArray)) // BULK DATA RECEIVED FROM SERVER
+                getMiscellaneousError() // MIS DATA RECEIVED FROM SERVER
             }
         } else {
-            return getNoResponseReceivedError()
+            return FirebaseResponse(parseFirebaseDataSnapShot(firebaseData.dataArray)) // BULK DATA RECEIVED FROM SERVER
         }
     }
 
@@ -138,7 +131,7 @@ abstract class BaseFirebaseTask<MKR> {
                 Log.e("MKR", "BaseFirebaseTask().executeFirebase() : ${e.message}")
             }
         }
-        return FirebaseData(firebaseData!!)
+        return FirebaseData(firebaseData)
     }
 
     /**
