@@ -13,8 +13,8 @@
 
 #	APP Level Gradle
 
-	implementation 'com.lory.library:firebase:1.0.0'
+	implementation 'com.lory.library:firebase:1.0.1'
 
 	<!-- DEPENDENCY INCLUDE IN LIB -->
 	implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-	implementation 'com.google.firebase:firebase-database:19.1.0'
+	implementation 'com.google.firebase:firebase-database:19.3.0'
